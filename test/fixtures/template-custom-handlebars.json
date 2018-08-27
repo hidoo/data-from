@@ -1,0 +1,6 @@
+{
+  "validJSON": {
+    "hoge": "hoge",
+    "fuga": "{{wrapBrackets validJSON.hoge}}"
+  }
+}

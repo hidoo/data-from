@@ -1,0 +1,3 @@
+validYAML:
+  hoge: "hoge"
+  fuga: "{{validYAML.hoge}}"

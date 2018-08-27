@@ -1,0 +1,6 @@
+{
+  validJSON5: {
+    hoge: 'hoge',
+    fuga: '{{validJSON5.hoge}}'
+  }
+}

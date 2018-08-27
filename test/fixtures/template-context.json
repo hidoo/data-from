@@ -1,0 +1,7 @@
+{
+  "validJSON": {
+    "hoge": "hoge",
+    "fuga": "{{validJSON.hoge}}",
+    "piyo": "{{data.hoge}}"
+  }
+}
