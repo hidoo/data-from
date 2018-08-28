@@ -8,6 +8,12 @@ import fromString from './fromString';
 const DEFAULT_OPTIONS = {
 
   /**
+   * additional template context
+   * @type {Object}
+   */
+  context: {},
+
+  /**
    * Handlrbars instance
    * @type {HandlebarsEnvironment}
    */
@@ -24,7 +30,6 @@ const DEFAULT_OPTIONS = {
  * parse data from front matter.
  * + handlebars template written inside is reevaluated with data itself
  * @param {String} value value
- * @param {Object} context template context
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
  *
@@ -33,7 +38,7 @@ const DEFAULT_OPTIONS = {
  *
  * const data = fromFrontMatter('---\ntest:\n  hoge: hoge\n  fuga: "{{test.hoge}}"\n---\n');
  */
-export default function fromFrontMatter(value = '', context = {}, options = {}) {
+export default function fromFrontMatter(value = '', options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options};
 
   if (typeof value === 'string') {
@@ -41,7 +46,7 @@ export default function fromFrontMatter(value = '', context = {}, options = {}) 
     if (frontMatter.test(value)) {
       const {body, frontmatter} = frontMatter(value);
 
-      return {body, attributes: fromString(frontmatter, context, opts), frontmatter};
+      return {body, attributes: fromString(frontmatter, opts), frontmatter};
     }
 
     return {body: value, attributes: null, frontmatter: ''};

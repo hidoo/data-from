@@ -10,6 +10,12 @@ import parse from './parse';
 const DEFAULT_OPTIONS = {
 
   /**
+   * additional template context
+   * @type {Object}
+   */
+  context: {},
+
+  /**
    * Handlrbars instance
    * @type {HandlebarsEnvironment}
    */
@@ -26,7 +32,6 @@ const DEFAULT_OPTIONS = {
  * parse data from string.
  * + handlebars template written inside is reevaluated with data itself
  * @param {String} value value
- * @param {Object} context template context
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
  *
@@ -35,13 +40,14 @@ const DEFAULT_OPTIONS = {
  *
  * const data = fromString('{"test": {"hoge": "hoge", "fuga": "{{test.hoge}}');
  */
-export default function fromString(value = '', context = {}, options = {}) {
+export default function fromString(value = '', options = {}) {
   const opts = {...DEFAULT_OPTIONS, ...options},
+        {context, verbose} = opts,
         handlebars = opts.handlebars || Handlebars.create();
 
   if (typeof value === 'string') {
     const template = handlebars.compile(value),
-          newContext = parse(template(normalize(context), {verbose: opts.verbose}));
+          newContext = parse(template(normalize(context), {verbose}));
 
     return parse(template(merge(context, newContext)));
   }

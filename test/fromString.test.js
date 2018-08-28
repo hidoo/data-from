@@ -76,7 +76,7 @@ describe('fromString', () => {
     });
   });
 
-  it('should return object if argument "value" is string that valid format includes Handlebars template and argument "context" is object.', () => {
+  it('should return object if argument "value" is string that valid format includes Handlebars template and argument "options.context" is object.', () => {
     const cases = [
       // JSON
       [
@@ -99,7 +99,7 @@ describe('fromString', () => {
     ];
 
     cases.forEach(([value, context, expected]) => {
-      const result = fromString(value, context);
+      const result = fromString(value, {context});
 
       assert.deepStrictEqual(result, expected);
     });
@@ -129,7 +129,7 @@ describe('fromString', () => {
     hbs.registerHelper('wrapBrackets', (value) => new Handlebars.SafeString(`[[ ${value} ]]`));
 
     cases.forEach(([value, expected]) => {
-      const result = fromString(value, null, {handlebars: hbs});
+      const result = fromString(value, {handlebars: hbs});
 
       assert.deepStrictEqual(result, expected);
     });

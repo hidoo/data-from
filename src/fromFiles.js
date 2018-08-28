@@ -17,6 +17,12 @@ const DEFAULT_OPTIONS = {
   encoding: 'utf8',
 
   /**
+   * additional template context
+   * @type {Object}
+   */
+  context: {},
+
+  /**
    * Handlrbars instance
    * @type {HandlebarsEnvironment}
    */
@@ -33,7 +39,6 @@ const DEFAULT_OPTIONS = {
  * parse data from files.
  * + handlebars template written inside is reevaluated with data itself
  * @param {String} pattern glob pattern
- * @param {Object} context template context
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
  *
@@ -42,12 +47,13 @@ const DEFAULT_OPTIONS = {
  *
  * const data = fromFiles('/path/to/*.json5');
  */
-export default function fromFiles(pattern = '', context = {}, options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+export default function fromFiles(pattern = '', options = {}) {
+  const opts = {...DEFAULT_OPTIONS, ...options},
+        {encoding, context} = opts;
 
   const {contents, data} = glob.sync(pattern)
-    .map((path) => fs.readFileSync(path, opts.encoding))
-    .map((content) => ({content: content, data: fromString(content, context, opts)}))
+    .map((path) => fs.readFileSync(path, encoding))
+    .map((content) => ({content: content, data: fromString(content, opts)}))
     .reduce((prev, current) => ({
       contents: [...prev.contents, current.content],
       data: merge(prev.data, current.data)
@@ -56,6 +62,6 @@ export default function fromFiles(pattern = '', context = {}, options = {}) {
   const newContext = merge(normalize(context), data);
 
   return contents
-    .map((content) => fromString(content, newContext, opts))
+    .map((content) => fromString(content, {...opts, context: newContext}))
     .reduce((prev, current) => merge(prev, current), {});
 }

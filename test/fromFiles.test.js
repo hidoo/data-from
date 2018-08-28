@@ -41,9 +41,9 @@ describe('fromFiles', () => {
     });
   });
 
-  it('should return object if argument "pattern" matched files are valid format that includes Handlebars Template and argument "context" is object.', () => {
+  it('should return object if argument "pattern" matched files are valid format that includes Handlebars Template and argument "options.context" is object.', () => {
     const context = {data: {hoge: 'piyo'}},
-          result = fromFiles(`${__dirname}/fixtures/template-context.{json,json5,yaml}`, context);
+          result = fromFiles(`${__dirname}/fixtures/template-context.{json,json5,yaml}`, {context});
 
     assert.deepStrictEqual(result, {
       validJSON: {hoge: 'hoge', fuga: 'hoge', piyo: 'piyo'},
@@ -58,7 +58,7 @@ describe('fromFiles', () => {
     // add custom helper
     hbs.registerHelper('wrapBrackets', (value) => new Handlebars.SafeString(`[[ ${value} ]]`));
 
-    const result = fromFiles(`${__dirname}/fixtures/template-custom-handlebars.{json,json5,yaml}`, null, {handlebars: hbs});
+    const result = fromFiles(`${__dirname}/fixtures/template-custom-handlebars.{json,json5,yaml}`, {handlebars: hbs});
 
     assert.deepStrictEqual(result, {
       validJSON: {hoge: 'hoge', fuga: '[[ hoge ]]'},

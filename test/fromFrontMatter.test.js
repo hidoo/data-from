@@ -150,7 +150,7 @@ describe('fromFrontMatter', () => {
     });
   });
 
-  it('should return formatted object if argument "value" is string that includes Front Matter that includes Handlebars Template and argument "context" is object.', () => {
+  it('should return formatted object if argument "value" is string that includes Front Matter that includes Handlebars Template and argument "options.context" is object.', () => {
     const cases = [
       // JSON
       [
@@ -173,7 +173,7 @@ describe('fromFrontMatter', () => {
     ];
 
     cases.forEach(([value, context, expected]) => {
-      const result = fromFrontMatter(value, context);
+      const result = fromFrontMatter(value, {context});
 
       assert.deepStrictEqual(result, expected);
     });
@@ -203,7 +203,7 @@ describe('fromFrontMatter', () => {
     hbs.registerHelper('wrapBrackets', (value) => new Handlebars.SafeString(`[[ ${value} ]]`));
 
     cases.forEach(([value, expected]) => {
-      const result = fromFrontMatter(value, context, {handlebars: hbs});
+      const result = fromFrontMatter(value, {handlebars: hbs});
 
       assert.deepStrictEqual(result, expected);
     });
