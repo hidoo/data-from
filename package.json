@@ -15,7 +15,10 @@
     "test": "npm-run-all -s test:*",
     "test:lint": "eslint .",
     "test:unit": "cross-env NODE_ENV=test mocha ./test",
-    "prepare": "npm-run-all -s test build"
+    "prepare": "npm-run-all -s test build",
+    "version": "npm-run-all -s version:changelog version:commit",
+    "version:changelog": "conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0",
+    "version:commit": "git add ./CHANGELOG.md"
   },
   "keywords": [
     "data",
@@ -36,9 +39,12 @@
     "@babel/core": "^7.0.0-rc.3",
     "@babel/preset-env": "^7.0.0-rc.3",
     "@babel/register": "^7.0.0-rc.3",
+    "@commitlint/cli": "^7.1.2",
+    "@commitlint/config-conventional": "^7.1.2",
     "@hidoo/eslint-config": "^0.1.1",
     "babel-eslint": "^10.0.1",
     "babel-preset-power-assert": "^3.0.0-beta.1",
+    "conventional-changelog-cli": "^2.0.5",
     "cross-env": "^5.2.0",
     "eslint": "^5.4.0",
     "husky": "^1.0.0-rc.13",
@@ -57,6 +63,7 @@
   },
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged"
     }
   },
