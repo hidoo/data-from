@@ -1,6 +1,6 @@
 # @hidoo/data-from
 
-[![Build Status](https://travis-ci.org/hidoo/data-from.svg?branch=master)](https://travis-ci.org/hidoo/data-from)
+[![Build Status](https://travis-ci.org/hidoo/data-from.svg?branch=master)](https://travis-ci.org/hidoo/data-from) [![Greenkeeper badge](https://badges.greenkeeper.io/hidoo/data-from.svg)](https://greenkeeper.io/)
 
 > A utility library that get data from JSON, JSON5, and YAML.
 
