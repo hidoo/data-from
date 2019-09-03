@@ -4,6 +4,7 @@ node_js:
   - "11"
   - "10"
   - "8"
+before_install:
+  - npm install -g yarn
 cache:
-  directories:
-    - "$HOME/.npm"
+  yarn: true
