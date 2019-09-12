@@ -6,30 +6,35 @@ import fromString from './fromString';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
 
   /**
    * file encoding
-   * @type {String|Null}
+   *
+   * @type {String|null}
    */
   encoding: 'utf8',
 
   /**
    * additional template context
+   *
    * @type {Object}
    */
   context: {},
 
   /**
    * Handlrbars instance
+   *
    * @type {HandlebarsEnvironment}
    */
   handlebars: null,
 
   /**
    * out verbose log
+   *
    * @type {Boolean}
    */
   verbose: false
@@ -38,6 +43,7 @@ const DEFAULT_OPTIONS = {
 /**
  * parse data from files.
  * + handlebars template written inside is reevaluated with data itself
+ *
  * @param {String} pattern glob pattern
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
@@ -52,12 +58,16 @@ export default function fromFiles(pattern = '', options = {}) {
         {encoding, context} = opts;
 
   const {contents, data} = glob.sync(pattern)
-    .map((path) => fs.readFileSync(path, encoding))
-    .map((content) => ({content: content, data: fromString(content, opts)}))
-    .reduce((prev, current) => ({
-      contents: [...prev.contents, current.content],
-      data: merge(prev.data, current.data)
-    }), {contents: [], data: {}});
+    .map((path) => fs.readFileSync(path, encoding)) // eslint-disable-line no-sync
+    .map((content) => {
+      return {content, data: fromString(content, opts)};
+    })
+    .reduce((prev, current) => {
+      return {
+        contents: [...prev.contents, current.content],
+        data: merge(prev.data, current.data)
+      };
+    }, {contents: [], data: {}});
 
   const newContext = merge(normalize(context), data);
 

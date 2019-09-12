@@ -6,8 +6,10 @@ export {fromFiles};
 export {fromFrontMatter};
 export {fromString};
 
-export default {
+const defaultExports = {
   fromFiles,
   fromFrontMatter,
   fromString
 };
+
+export default defaultExports;

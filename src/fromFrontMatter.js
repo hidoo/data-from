@@ -3,24 +3,28 @@ import fromString from './fromString';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
 
   /**
    * additional template context
+   *
    * @type {Object}
    */
   context: {},
 
   /**
    * Handlrbars instance
+   *
    * @type {HandlebarsEnvironment}
    */
   handlebars: null,
 
   /**
    * out verbose log
+   *
    * @type {Boolean}
    */
   verbose: false
@@ -29,6 +33,7 @@ const DEFAULT_OPTIONS = {
 /**
  * parse data from front matter.
  * + handlebars template written inside is reevaluated with data itself
+ *
  * @param {String} value value
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
