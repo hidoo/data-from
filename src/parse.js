@@ -5,12 +5,14 @@ import log from './log';
 
 /**
  * default options
+ *
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
 
   /**
    * out verbose log
+   *
    * @type {Boolean}
    */
   verbose: false
@@ -18,6 +20,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * parse JSON, JSON5, and YAML
+ *
  * @param {String} value value
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
