@@ -55,7 +55,7 @@
   "dependencies": {
     "front-matter": "3.0.2",
     "glob": "7.1.4",
-    "handlebars": "4.4.0",
+    "handlebars": "4.4.2",
     "js-yaml": "3.13.1",
     "json5": "2.1.0",
     "lodash.merge": "4.6.2"
