@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "front-matter": "3.0.2",
-    "glob": "7.1.4",
+    "glob": "7.1.5",
     "handlebars": "4.4.3",
     "js-yaml": "3.13.1",
     "json5": "2.1.1",
