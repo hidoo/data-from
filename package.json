@@ -41,7 +41,7 @@
     "@babel/register": "7.7.7",
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
-    "@hidoo/eslint-config": "0.3.0",
+    "@hidoo/eslint-config": "0.3.1",
     "babel-preset-power-assert": "3.0.0",
     "conventional-changelog-cli": "2.0.31",
     "cross-env": "6.0.3",
