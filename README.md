@@ -1,6 +1,6 @@
 # @hidoo/data-from
 
-[![Build Status](https://travis-ci.org/hidoo/data-from.svg?branch=master)](https://travis-ci.org/hidoo/data-from)
+[![Status](https://github.com/hidoo/data-from/workflows/Main%20workflow/badge.svg)](https://github.com/hidoo/data-from/actions?query=branch%3Amaster)
 
 > A utility library that get data from JSON, JSON5, and YAML.
 
