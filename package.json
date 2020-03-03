@@ -16,7 +16,7 @@
     "test:lint": "eslint .",
     "test:unit": "cross-env NODE_ENV=test mocha ./test",
     "prepare": "npm-run-all -s test build",
-    "version": "npm-run-all -s version:changelog version:commit",
+    "version": "npm-run-all -s prepare version:changelog version:commit",
     "version:changelog": "conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0",
     "version:commit": "git add ./CHANGELOG.md"
   },
