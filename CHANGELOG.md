@@ -1,3 +1,20 @@
+# [0.3.0](https://github.com/hidoo/data-from/compare/v0.2.0...v0.3.0) (2020-05-07)
+
+
+### Bug Fixes
+
+* **deps:** force update minimist to version 1.2.5 or later ([e49d09b](https://github.com/hidoo/data-from/commit/e49d09b05624110b5f681e1d421370877d983f2b))
+* **deps:** update dependency handlebars to v4.7.6 ([5d64a7c](https://github.com/hidoo/data-from/commit/5d64a7ce67ff17d26f6761fbde929c94252f927c))
+* **deps:** update dependency json5 to v2.1.2 ([98cc50a](https://github.com/hidoo/data-from/commit/98cc50a5c6777a41b69bcba26967542054ae79c4))
+* **deps:** update dependency json5 to v2.1.3 ([3b475b7](https://github.com/hidoo/data-from/commit/3b475b773a8b9dda8e35282136a925702e0c5195))
+
+
+### Features
+
+* **node:** add node v14 support ([77f1ccf](https://github.com/hidoo/data-from/commit/77f1ccfadd1458dd249980c7122653a68b3e13fa))
+
+
+
 # [0.2.0](https://github.com/hidoo/data-from/compare/v0.1.3...v0.2.0) (2020-03-03)
 
 
