@@ -58,7 +58,7 @@ export default function fromFiles(pattern = '', options = {}) {
         {encoding, context} = opts;
 
   const {contents, data} = glob.sync(pattern)
-    .map((path) => fs.readFileSync(path, encoding)) // eslint-disable-line no-sync
+    .map((path) => fs.readFileSync(path, encoding)) // eslint-disable-line node/no-sync
     .map((content) => {
       return {content, data: fromString(content, opts)};
     })
