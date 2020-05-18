@@ -53,7 +53,7 @@
     "power-assert": "1.6.1"
   },
   "dependencies": {
-    "front-matter": "3.1.0",
+    "front-matter": "3.2.1",
     "glob": "7.1.6",
     "handlebars": "4.7.6",
     "js-yaml": "3.13.1",
