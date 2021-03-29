@@ -1,3 +1,21 @@
+## [0.3.1](https://github.com/hidoo/data-from/compare/v0.3.0...v0.3.1) (2021-03-29)
+
+
+### Bug Fixes
+
+* **deps:** rollback husky 5 to 4 ([517b1e5](https://github.com/hidoo/data-from/commit/517b1e538198f9c01f64d0ca4a74e6be8f1178be))
+* **deps:** update dependency front-matter to v3.2.1 ([ad9583c](https://github.com/hidoo/data-from/commit/ad9583c0f89f32c22920aaba62070bb99dea7ea0))
+* **deps:** update dependency front-matter to v4 ([78b884d](https://github.com/hidoo/data-from/commit/78b884deffcbe99aa4b39a754cef83d6007492fa))
+* **deps:** update dependency front-matter to v4.0.2 ([45efc71](https://github.com/hidoo/data-from/commit/45efc71b80b8069a7481bdd1390fc1526081a015))
+* **deps:** update dependency handlebars to v4.7.7 ([ca67ba9](https://github.com/hidoo/data-from/commit/ca67ba97a95dfdbd48fbb827c5cca824016bd067))
+* **deps:** update dependency js-yaml to v3.14.0 ([f427d3e](https://github.com/hidoo/data-from/commit/f427d3e8d22dbab437052efcef90742b239dd236))
+* **deps:** update dependency js-yaml to v3.14.1 ([c1954cd](https://github.com/hidoo/data-from/commit/c1954cdb0181784e309eddd059264a707fda916d))
+* **deps:** update dependency js-yaml to v4 ([ef3cd74](https://github.com/hidoo/data-from/commit/ef3cd74373a52273dfa1f4f5078d6120adef74cc))
+* **deps:** update dependency json5 to v2.2.0 ([abc9d28](https://github.com/hidoo/data-from/commit/abc9d28d8e85e81ea2e2be7183b2d08a37eb9bce))
+* **parse:** fix to use yaml.load instead of yaml.safeLoad ([dec0151](https://github.com/hidoo/data-from/commit/dec015168456f0198acd67cd5fdeea16fa685e0d))
+
+
+
 # [0.3.0](https://github.com/hidoo/data-from/compare/v0.2.0...v0.3.0) (2020-05-07)
 
 
