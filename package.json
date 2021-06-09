@@ -15,7 +15,8 @@
     "test": "npm-run-all -s test:*",
     "test:lint": "eslint .",
     "test:unit": "cross-env NODE_ENV=test mocha ./test",
-    "prepare": "npm-run-all -s test build",
+    "prepare": "npm-run-all -s prepare:* test build",
+    "prepare:husky": "husky install",
     "version": "npm-run-all -s prepare version:changelog version:commit",
     "version:changelog": "conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0",
     "version:commit": "git add ./CHANGELOG.md"
@@ -62,12 +63,6 @@
   },
   "resolutions": {
     "minimist": "^1.2.5"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "**/*.js": [
