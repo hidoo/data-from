@@ -44,7 +44,7 @@ export default function parse(value, options = {}) {
       } catch (JSON5Error) {
         log(JSON5Error, { verbose: opts.verbose });
 
-        // finaly try parse as YAML
+        // finally try parse as YAML
         result = yaml.load(value);
       }
     }

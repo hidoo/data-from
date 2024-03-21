@@ -17,7 +17,7 @@ const DEFAULT_OPTIONS = {
   context: {},
 
   /**
-   * Handlrbars instance
+   * Handlebars instance
    *
    * @type {HandlebarsEnvironment}
    */
