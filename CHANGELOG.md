@@ -1,3 +1,28 @@
+# [1.0.0](https://github.com/hidoo/data-from/compare/v0.3.1...v1.0.0) (2024-03-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency glob to v7.1.7 ([4f62cfc](https://github.com/hidoo/data-from/commit/4f62cfcebb7fded920ab87494dab7a4ea22db5d3))
+* **deps:** update dependency handlebars to v4.7.8 ([255ba46](https://github.com/hidoo/data-from/commit/255ba46b8d4a527ce0466f18896a8b16c26faf2a))
+* **deps:** update dependency js-yaml to v4.1.0 ([06877d0](https://github.com/hidoo/data-from/commit/06877d07493ced5743b5456151d151b2ae5133ba))
+* **deps:** update dependency json5 to v2.2.1 ([a1ced46](https://github.com/hidoo/data-from/commit/a1ced46a1383de7aa023903bd8dca8aa118a0684))
+* **deps:** update dependency json5 to v2.2.2 [security] ([5ca1b06](https://github.com/hidoo/data-from/commit/5ca1b0613be5bbfda1da6105ffca97ed01eca162))
+* **deps:** update dependency json5 to v2.2.3 ([1f27c7e](https://github.com/hidoo/data-from/commit/1f27c7e9e6dca3ad22bc7402651296fe41956bef))
+* **node:** remove node v10 support ([9eda732](https://github.com/hidoo/data-from/commit/9eda73269ab88d36d7e1a140c0bb295ca5d47cbd))
+
+
+* fix!: migrate to es modules ([8e1f004](https://github.com/hidoo/data-from/commit/8e1f004682e6bc36a13ce8fc99f7d2444ec40849))
+* fix!: update supported nodejs versions ([e49d540](https://github.com/hidoo/data-from/commit/e49d5406f47aaf413ed7ab835369f4f0df9ed953))
+
+
+### BREAKING CHANGES
+
+* Requires ES Modules.
+* Drop Node.js 12, 14, 16 support
+
+
+
 ## [0.3.1](https://github.com/hidoo/data-from/compare/v0.3.0...v0.3.1) (2021-03-29)
 
 
