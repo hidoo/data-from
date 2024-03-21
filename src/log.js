@@ -4,7 +4,6 @@
  * @param  {Any} value print value
  * @param {Object} options options
  * @return {void}
- *
  * @example
  * log(value, {verbose: true});
  */

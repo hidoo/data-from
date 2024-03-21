@@ -36,7 +36,6 @@ const DEFAULT_OPTIONS = {
  * @param {String} value value
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
- *
  * @example
  * import {fromFrontMatter} from '@hidoo/data-from';
  *

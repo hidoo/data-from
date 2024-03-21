@@ -38,7 +38,6 @@ const DEFAULT_OPTIONS = {
  * @param {String} value value
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
- *
  * @example
  * import {fromString} from '@hidoo/data-from';
  *

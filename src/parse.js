@@ -23,7 +23,6 @@ const DEFAULT_OPTIONS = {
  * @param {String} value value
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
- *
  * @example
  * const parsed = parse(value, {verbose: true});
  */

@@ -5,7 +5,6 @@
  *
  * @param {Any} value value
  * @return {Object}
- *
  * @example
  * const normalized = normalize(value);
  */
