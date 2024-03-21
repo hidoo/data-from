@@ -15,7 +15,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production babel ./src --out-dir ./lib",
     "preinstall": "npx only-allow pnpm",
-    "prepare": "husky install",
+    "prepare": "git config --local core.hooksPath .githooks",
     "test": "pnpm run --sequential '/^test:.*/'",
     "test:lint": "eslint .",
     "test:unit": "cross-env NODE_ENV=test mocha ./test",
