@@ -1,5 +1,5 @@
 import frontMatter from 'front-matter';
-import fromString from './fromString';
+import fromString from './fromString.js';
 
 /**
  * default options
@@ -7,7 +7,6 @@ import fromString from './fromString';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * additional template context
    *
@@ -16,7 +15,7 @@ const DEFAULT_OPTIONS = {
   context: {},
 
   /**
-   * Handlrbars instance
+   * Handlebars instance
    *
    * @type {HandlebarsEnvironment}
    */
@@ -37,25 +36,23 @@ const DEFAULT_OPTIONS = {
  * @param {String} value value
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
- *
  * @example
  * import {fromFrontMatter} from '@hidoo/data-from';
  *
  * const data = fromFrontMatter('---\ntest:\n  hoge: hoge\n  fuga: "{{test.hoge}}"\n---\n');
  */
 export default function fromFrontMatter(value = '', options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   if (typeof value === 'string') {
-
     if (frontMatter.test(value)) {
-      const {body, frontmatter} = frontMatter(value);
+      const { body, frontmatter } = frontMatter(value);
 
-      return {body, attributes: fromString(frontmatter, opts), frontmatter};
+      return { body, attributes: fromString(frontmatter, opts), frontmatter };
     }
 
-    return {body: value, attributes: null, frontmatter: ''};
+    return { body: value, attributes: null, frontmatter: '' };
   }
 
-  return {body: '', attributes: null, frontmatter: ''};
+  return { body: '', attributes: null, frontmatter: '' };
 }

@@ -1,8 +1,9 @@
-import fs from 'fs';
-import glob from 'glob';
+import fs from 'node:fs';
+import fsPromises from 'node:fs/promises';
+import { glob, globSync } from 'glob';
 import merge from 'lodash.merge';
-import normalize from './normalize';
-import fromString from './fromString';
+import normalize from './normalize.js';
+import fromString from './fromString.js';
 
 /**
  * default options
@@ -10,7 +11,6 @@ import fromString from './fromString';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * file encoding
    *
@@ -26,11 +26,18 @@ const DEFAULT_OPTIONS = {
   context: {},
 
   /**
-   * Handlrbars instance
+   * Handlebars instance
    *
    * @type {HandlebarsEnvironment}
    */
   handlebars: null,
+
+  /**
+   * glob options
+   *
+   * @type {Object}
+   */
+  glob: {},
 
   /**
    * out verbose log
@@ -41,37 +48,70 @@ const DEFAULT_OPTIONS = {
 };
 
 /**
- * parse data from files.
- * + handlebars template written inside is reevaluated with data itself
+ * Parse contents
+ * + handlebars template written inside is re-evaluated with data itself
+ *
+ * @param {Array<Buffer|String>} contents contents list
+ * @param {DEFAULT_OPTIONS} options options
+ * @return {Object}
+ */
+function parseContents(contents = [], options = {}) {
+  if (!Array.isArray(contents)) {
+    return {};
+  }
+
+  const ctx = contents
+    .map((content) => fromString(content, options))
+    .reduce((prev, data) => merge(prev, data), {});
+  const context = merge(normalize(options.context), ctx);
+
+  return contents
+    .map((content) => fromString(content, { ...options, context }))
+    .reduce((prev, current) => merge(prev, current), {});
+}
+
+/**
+ * Parse data from files.
  *
  * @param {String} pattern glob pattern
  * @param {DEFAULT_OPTIONS} options options
  * @return {Object}
- *
  * @example
- * import {fromFiles} from '@hidoo/data-from';
+ * import { fromFiles } from '@hidoo/data-from';
+ *
+ * const data = await fromFiles('/path/to/*.json5');
+ */
+export async function fromFiles(pattern = '', options = {}) {
+  const opts = { ...DEFAULT_OPTIONS, ...options };
+
+  const filePaths = await glob(pattern, opts.glob);
+  const contents = await Promise.all(
+    filePaths.map(
+      async (path) => await fsPromises.readFile(path, opts.encoding)
+    )
+  );
+
+  return parseContents(contents, opts);
+}
+
+/**
+ * Parse data from files synchronously.
+ *
+ * @param {String} pattern glob pattern
+ * @param {DEFAULT_OPTIONS} options options
+ * @return {Object}
+ * @example
+ * import { fromFilesSync } from '@hidoo/data-from';
  *
  * const data = fromFiles('/path/to/*.json5');
  */
-export default function fromFiles(pattern = '', options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options},
-        {encoding, context} = opts;
+export function fromFilesSync(pattern = '', options = {}) {
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
-  const {contents, data} = glob.sync(pattern)
-    .map((path) => fs.readFileSync(path, encoding)) // eslint-disable-line node/no-sync
-    .map((content) => {
-      return {content, data: fromString(content, opts)};
-    })
-    .reduce((prev, current) => {
-      return {
-        contents: [...prev.contents, current.content],
-        data: merge(prev.data, current.data)
-      };
-    }, {contents: [], data: {}});
+  const contents = globSync(pattern, opts.glob).map((path) =>
+    // eslint-disable-next-line node/no-sync
+    fs.readFileSync(path, opts.encoding)
+  );
 
-  const newContext = merge(normalize(context), data);
-
-  return contents
-    .map((content) => fromString(content, {...opts, context: newContext}))
-    .reduce((prev, current) => merge(prev, current), {});
+  return parseContents(contents, opts);
 }

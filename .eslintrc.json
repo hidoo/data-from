@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc.json",
+  "root": true,
+  "extends": ["@hidoo/eslint-config"],
+  "overrides": [
+    {
+      "files": ["**/src/**/*.js"],
+      "extends": ["@hidoo/eslint-config/+node"],
+      "rules": {
+        "import/no-anonymous-default-export": "off",
+        "node/file-extension-in-import": ["error", "always"]
+      }
+    },
+    {
+      "files": ["**/*.test.js"],
+      "extends": ["@hidoo/eslint-config/+mocha", "@hidoo/eslint-config/+node"],
+      "rules": {
+        "no-empty-function": "off",
+        "node/file-extension-in-import": ["error", "always"]
+      }
+    }
+  ]
+}

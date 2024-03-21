@@ -1,10 +1,9 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import normalize from '../src/normalize';
+import assert from 'node:assert';
+import normalize from '../src/normalize.js';
 
 describe('normalize', () => {
-
   it('should return empty object if argument "value" is not set.', () => {
     const result = normalize();
 
@@ -16,11 +15,11 @@ describe('normalize', () => {
       [null, {}],
       ['', {}],
       [0, {}],
-      ['test', {test: 'test'}],
-      [9, {9: 9}],
+      ['test', { test: 'test' }],
+      [9, { 9: 9 }],
       [['test'], ['test']],
-      [{test: null}, {test: null}],
-      [{test: [{hoge: 'hoge'}]}, {test: [{hoge: 'hoge'}]}]
+      [{ test: null }, { test: null }],
+      [{ test: [{ hoge: 'hoge' }] }, { test: [{ hoge: 'hoge' }] }]
     ];
 
     cases.forEach(([value, expected]) => {
@@ -29,5 +28,4 @@ describe('normalize', () => {
       assert.deepStrictEqual(result, expected);
     });
   });
-
 });

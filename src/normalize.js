@@ -5,7 +5,6 @@
  *
  * @param {Any} value value
  * @return {Object}
- *
  * @example
  * const normalized = normalize(value);
  */
@@ -14,7 +13,7 @@ export default function normalize(value = {}) {
     return {};
   }
   if (typeof value === 'string' || typeof value === 'number') {
-    return {[value]: value};
+    return { [value]: value };
   }
   return value;
 }

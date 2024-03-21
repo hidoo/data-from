@@ -4,12 +4,11 @@
  * @param  {Any} value print value
  * @param {Object} options options
  * @return {void}
- *
  * @example
  * log(value, {verbose: true});
  */
 export default function log(value, options) {
-  const opts = {verbose: false, ...options};
+  const opts = { verbose: false, ...options };
 
   if (!console || typeof console.error !== 'function') {
     return;
@@ -20,8 +19,7 @@ export default function log(value, options) {
 
   if (value instanceof Error) {
     console.error(value);
-  }
-  else {
+  } else {
     console.log(value);
   }
 }
