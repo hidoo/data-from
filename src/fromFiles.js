@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import glob from 'glob';
+import { globSync } from 'glob';
 import merge from 'lodash.merge';
 import normalize from './normalize.js';
 import fromString from './fromString.js';
@@ -56,8 +56,7 @@ export default function fromFiles(pattern = '', options = {}) {
   const opts = { ...DEFAULT_OPTIONS, ...options },
     { encoding, context } = opts;
 
-  const { contents, data } = glob
-    .sync(pattern)
+  const { contents, data } = globSync(pattern)
     .map((path) => fs.readFileSync(path, encoding)) // eslint-disable-line node/no-sync
     .map((content) => {
       return { content, data: fromString(content, opts) };
