@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Handlebars from 'handlebars';
-import fromFiles from '../src/fromFiles.js';
+import { fromFiles, fromFilesSync } from '../src/fromFiles.js';
 
 describe('fromFiles', () => {
   let dirname = null;
@@ -13,76 +13,185 @@ describe('fromFiles', () => {
     fixturesDir = path.resolve(dirname, 'fixtures');
   });
 
-  it('should return empty object if argument "pattern" matched files not readable.', () => {
-    const result = fromFiles(
-      path.join(fixturesDir, 'not_exists.{json,json5,yaml}')
-    );
+  describe('Async API', () => {
+    context('if argument "pattern" matched files are invalid format.', () => {
+      it('should throw Error.', async () => {
+        let error = null;
 
-    assert.deepEqual(result, {});
-  });
+        try {
+          await fromFiles(path.join(fixturesDir, 'invalid.{json,json5,yaml}'));
+        } catch (err) {
+          error = err;
+        }
 
-  it('should throw Error if argument "pattern" matched files are invalid format.', () => {
-    try {
-      fromFiles(path.join(fixturesDir, 'invalid.{json,json5,yaml}'));
-    } catch (error) {
-      assert(error instanceof Error);
-    }
-  });
+        assert(error instanceof Error);
+      });
+    });
 
-  it('should return object if argument "pattern" matched files are valid format.', () => {
-    const result = fromFiles(path.join(fixturesDir, 'valid.{json,json5,yaml}'));
+    context('if argument "pattern" matched files are not readable.', () => {
+      it('should return an empty object.', async () => {
+        const result = await fromFiles(
+          path.join(fixturesDir, 'not_exists.{json,json5,yaml}')
+        );
 
-    assert.deepEqual(result, {
-      validJSON: { hoge: 'hoge' },
-      validJSON5: { hoge: 'hoge' },
-      validYAML: { hoge: 'hoge' }
+        assert.deepEqual(result, {});
+      });
+    });
+
+    context('if argument "pattern" matched files are valid format.', () => {
+      it('should return an object includes merged data.', async () => {
+        const result = await fromFiles(
+          path.join(fixturesDir, 'valid.{json,json5,yaml}')
+        );
+
+        assert.deepEqual(result, {
+          validJSON: { hoge: 'hoge' },
+          validJSON5: { hoge: 'hoge' },
+          validYAML: { hoge: 'hoge' }
+        });
+      });
+
+      it('should return an object includes merged data evaluated with Handlebars Template.', async () => {
+        const result = await fromFiles(
+          path.join(fixturesDir, 'template.{json,json5,yaml}')
+        );
+
+        assert.deepEqual(result, {
+          validJSON: { hoge: 'hoge', fuga: 'hoge' },
+          validJSON5: { hoge: 'hoge', fuga: 'hoge' },
+          validYAML: { hoge: 'hoge', fuga: 'hoge' }
+        });
+      });
+
+      context('with options.', () => {
+        it('should use additional context with options.context.', async () => {
+          const context = { data: { hoge: 'piyo' } };
+          const result = await fromFiles(
+            path.join(fixturesDir, 'template-context.{json,json5,yaml}'),
+            { context }
+          );
+
+          assert.deepEqual(result, {
+            validJSON: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' },
+            validJSON5: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' },
+            validYAML: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' }
+          });
+        });
+
+        it('should use specified Handlebars instance with options.handlebars.', async () => {
+          const hbs = Handlebars.create();
+          const wrapBrackets = (value) =>
+            new Handlebars.SafeString(`[[ ${value} ]]`);
+
+          // add custom helper
+          hbs.registerHelper('wrapBrackets', wrapBrackets);
+
+          const result = await fromFiles(
+            path.join(
+              fixturesDir,
+              'template-custom-handlebars.{json,json5,yaml}'
+            ),
+            { handlebars: hbs }
+          );
+
+          assert.deepEqual(result, {
+            validJSON: { hoge: 'hoge', fuga: '[[ hoge ]]' },
+            validJSON5: { hoge: 'hoge', fuga: '[[ hoge ]]' },
+            validYAML: { hoge: 'hoge', fuga: '[[ hoge ]]' }
+          });
+        });
+      });
     });
   });
 
-  it('should return object if argument "pattern" matched files are valid format that includes Handlebars Template.', () => {
-    const result = fromFiles(
-      path.join(fixturesDir, 'template.{json,json5,yaml}')
-    );
+  describe('Sync API', () => {
+    context('if argument "pattern" matched files are invalid format.', () => {
+      it('should throw Error.', () => {
+        let error = null;
 
-    assert.deepEqual(result, {
-      validJSON: { hoge: 'hoge', fuga: 'hoge' },
-      validJSON5: { hoge: 'hoge', fuga: 'hoge' },
-      validYAML: { hoge: 'hoge', fuga: 'hoge' }
+        try {
+          fromFilesSync(path.join(fixturesDir, 'invalid.{json,json5,yaml}'));
+        } catch (err) {
+          error = err;
+        }
+
+        assert(error instanceof Error);
+      });
     });
-  });
 
-  it('should return object if argument "pattern" matched files are valid format that includes Handlebars Template and argument "options.context" is object.', () => {
-    const context = { data: { hoge: 'piyo' } },
-      result = fromFiles(
-        path.join(fixturesDir, 'template-context.{json,json5,yaml}'),
-        { context }
-      );
+    context('if argument "pattern" matched files are not readable.', () => {
+      it('should return an empty object.', () => {
+        const result = fromFilesSync(
+          path.join(fixturesDir, 'not_exists.{json,json5,yaml}')
+        );
 
-    assert.deepEqual(result, {
-      validJSON: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' },
-      validJSON5: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' },
-      validYAML: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' }
+        assert.deepEqual(result, {});
+      });
     });
-  });
 
-  it('should use specified Handlebars instance if argument "options.handlebars" is set.', () => {
-    const hbs = Handlebars.create();
+    context('if argument "pattern" matched files are valid format.', () => {
+      it('should return an object includes merged data.', () => {
+        const result = fromFilesSync(
+          path.join(fixturesDir, 'valid.{json,json5,yaml}')
+        );
 
-    // add custom helper
-    hbs.registerHelper(
-      'wrapBrackets',
-      (value) => new Handlebars.SafeString(`[[ ${value} ]]`)
-    );
+        assert.deepEqual(result, {
+          validJSON: { hoge: 'hoge' },
+          validJSON5: { hoge: 'hoge' },
+          validYAML: { hoge: 'hoge' }
+        });
+      });
 
-    const result = fromFiles(
-      path.join(fixturesDir, 'template-custom-handlebars.{json,json5,yaml}'),
-      { handlebars: hbs }
-    );
+      it('should return an object includes merged data evaluated with Handlebars Template.', () => {
+        const result = fromFilesSync(
+          path.join(fixturesDir, 'template.{json,json5,yaml}')
+        );
 
-    assert.deepEqual(result, {
-      validJSON: { hoge: 'hoge', fuga: '[[ hoge ]]' },
-      validJSON5: { hoge: 'hoge', fuga: '[[ hoge ]]' },
-      validYAML: { hoge: 'hoge', fuga: '[[ hoge ]]' }
+        assert.deepEqual(result, {
+          validJSON: { hoge: 'hoge', fuga: 'hoge' },
+          validJSON5: { hoge: 'hoge', fuga: 'hoge' },
+          validYAML: { hoge: 'hoge', fuga: 'hoge' }
+        });
+      });
+
+      context('with options.', () => {
+        it('should use additional context with options.context.', () => {
+          const context = { data: { hoge: 'piyo' } };
+          const result = fromFilesSync(
+            path.join(fixturesDir, 'template-context.{json,json5,yaml}'),
+            { context }
+          );
+
+          assert.deepEqual(result, {
+            validJSON: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' },
+            validJSON5: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' },
+            validYAML: { hoge: 'hoge', fuga: 'hoge', piyo: 'piyo' }
+          });
+        });
+
+        it('should use specified Handlebars instance with options.handlebars.', () => {
+          const hbs = Handlebars.create();
+          const wrapBrackets = (value) =>
+            new Handlebars.SafeString(`[[ ${value} ]]`);
+
+          // add custom helper
+          hbs.registerHelper('wrapBrackets', wrapBrackets);
+
+          const result = fromFilesSync(
+            path.join(
+              fixturesDir,
+              'template-custom-handlebars.{json,json5,yaml}'
+            ),
+            { handlebars: hbs }
+          );
+
+          assert.deepEqual(result, {
+            validJSON: { hoge: 'hoge', fuga: '[[ hoge ]]' },
+            validJSON5: { hoge: 'hoge', fuga: '[[ hoge ]]' },
+            validYAML: { hoge: 'hoge', fuga: '[[ hoge ]]' }
+          });
+        });
+      });
     });
   });
 });
