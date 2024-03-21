@@ -9,7 +9,6 @@ import parse from './parse';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * additional template context
    *
@@ -46,13 +45,13 @@ const DEFAULT_OPTIONS = {
  * const data = fromString('{"test": {"hoge": "hoge", "fuga": "{{test.hoge}}');
  */
 export default function fromString(value = '', options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options},
-        {context, verbose} = opts,
-        handlebars = opts.handlebars || Handlebars.create();
+  const opts = { ...DEFAULT_OPTIONS, ...options },
+    { context, verbose } = opts,
+    handlebars = opts.handlebars || Handlebars.create();
 
   if (typeof value === 'string') {
     const template = handlebars.compile(value),
-          newContext = parse(template(normalize(context), {verbose}));
+      newContext = parse(template(normalize(context), { verbose }));
 
     return parse(template(merge(context, newContext)));
   }

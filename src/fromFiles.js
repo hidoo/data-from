@@ -10,7 +10,6 @@ import fromString from './fromString';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * file encoding
    *
@@ -54,24 +53,28 @@ const DEFAULT_OPTIONS = {
  * const data = fromFiles('/path/to/*.json5');
  */
 export default function fromFiles(pattern = '', options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options},
-        {encoding, context} = opts;
+  const opts = { ...DEFAULT_OPTIONS, ...options },
+    { encoding, context } = opts;
 
-  const {contents, data} = glob.sync(pattern)
+  const { contents, data } = glob
+    .sync(pattern)
     .map((path) => fs.readFileSync(path, encoding)) // eslint-disable-line node/no-sync
     .map((content) => {
-      return {content, data: fromString(content, opts)};
+      return { content, data: fromString(content, opts) };
     })
-    .reduce((prev, current) => {
-      return {
-        contents: [...prev.contents, current.content],
-        data: merge(prev.data, current.data)
-      };
-    }, {contents: [], data: {}});
+    .reduce(
+      (prev, current) => {
+        return {
+          contents: [...prev.contents, current.content],
+          data: merge(prev.data, current.data)
+        };
+      },
+      { contents: [], data: {} }
+    );
 
   const newContext = merge(normalize(context), data);
 
   return contents
-    .map((content) => fromString(content, {...opts, context: newContext}))
+    .map((content) => fromString(content, { ...opts, context: newContext }))
     .reduce((prev, current) => merge(prev, current), {});
 }

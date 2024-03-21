@@ -1,4 +1,4 @@
 validYAML:
-  hoge: "hoge"
-  fuga: "{{validYAML.hoge}}"
-  piyo: "{{data.hoge}}"
+  hoge: 'hoge'
+  fuga: '{{validYAML.hoge}}'
+  piyo: '{{data.hoge}}'

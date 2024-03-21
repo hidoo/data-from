@@ -7,7 +7,6 @@ import fromString from './fromString';
  * @type {Object}
  */
 const DEFAULT_OPTIONS = {
-
   /**
    * additional template context
    *
@@ -44,18 +43,17 @@ const DEFAULT_OPTIONS = {
  * const data = fromFrontMatter('---\ntest:\n  hoge: hoge\n  fuga: "{{test.hoge}}"\n---\n');
  */
 export default function fromFrontMatter(value = '', options = {}) {
-  const opts = {...DEFAULT_OPTIONS, ...options};
+  const opts = { ...DEFAULT_OPTIONS, ...options };
 
   if (typeof value === 'string') {
-
     if (frontMatter.test(value)) {
-      const {body, frontmatter} = frontMatter(value);
+      const { body, frontmatter } = frontMatter(value);
 
-      return {body, attributes: fromString(frontmatter, opts), frontmatter};
+      return { body, attributes: fromString(frontmatter, opts), frontmatter };
     }
 
-    return {body: value, attributes: null, frontmatter: ''};
+    return { body: value, attributes: null, frontmatter: '' };
   }
 
-  return {body: '', attributes: null, frontmatter: ''};
+  return { body: '', attributes: null, frontmatter: '' };
 }

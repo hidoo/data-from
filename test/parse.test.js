@@ -4,7 +4,6 @@ import assert from 'assert';
 import parse from '../src/parse';
 
 describe('parse', () => {
-
   it('should return empty object if argument "value" is not set.', () => {
     const result = parse();
 
@@ -14,8 +13,7 @@ describe('parse', () => {
   it('should throw Error if argument "value" is invalid format.', () => {
     try {
       parse('------');
-    }
-    catch (error) {
+    } catch (error) {
       assert(error instanceof Error);
     }
   });
@@ -25,11 +23,11 @@ describe('parse', () => {
       [null, {}],
       ['', {}],
       ['0', {}],
-      ['test', {test: 'test'}],
-      ['9', {9: 9}],
+      ['test', { test: 'test' }],
+      ['9', { 9: 9 }],
       ['["test"]', ['test']],
-      ['{"test": null}', {test: null}],
-      ['{"test": [{"hoge": "hoge"}]}', {test: [{hoge: 'hoge'}]}]
+      ['{"test": null}', { test: null }],
+      ['{"test": [{"hoge": "hoge"}]}', { test: [{ hoge: 'hoge' }] }]
     ];
 
     cases.forEach(([value, expected]) => {
@@ -44,11 +42,11 @@ describe('parse', () => {
       [null, {}],
       ['', {}],
       ['0', {}],
-      ['test', {test: 'test'}],
-      ['9', {9: 9}],
-      ['[\'test\']', ['test']],
-      ['{test: null}', {test: null}],
-      ['{test: [{\'hoge\': "ho\nge"}]}', {test: [{hoge: 'ho ge'}]}]
+      ['test', { test: 'test' }],
+      ['9', { 9: 9 }],
+      ["['test']", ['test']],
+      ['{test: null}', { test: null }],
+      ['{test: [{\'hoge\': "ho\nge"}]}', { test: [{ hoge: 'ho ge' }] }]
     ];
 
     cases.forEach(([value, expected]) => {
@@ -63,11 +61,11 @@ describe('parse', () => {
       [null, {}],
       ['', {}],
       ['0', {}],
-      ['test', {test: 'test'}],
-      ['9', {9: 9}],
+      ['test', { test: 'test' }],
+      ['9', { 9: 9 }],
       ['- test', ['test']],
-      ['test:', {test: null}],
-      ['test:\n  - hoge: hoge', {test: [{hoge: 'hoge'}]}]
+      ['test:', { test: null }],
+      ['test:\n  - hoge: hoge', { test: [{ hoge: 'hoge' }] }]
     ];
 
     cases.forEach(([value, expected]) => {
@@ -86,5 +84,4 @@ describe('parse', () => {
       assert.deepStrictEqual(result, {});
     });
   });
-
 });

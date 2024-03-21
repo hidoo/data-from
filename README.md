@@ -15,7 +15,7 @@ $ npm install @hidoo/data-from
 from string:
 
 ```js
-import {fromString} from '@hidoo/data-from';
+import { fromString } from '@hidoo/data-from';
 
 const data = fromString('{"test": {"hoge": "hoge", "fuga": "{{test.hoge}}');
 // {test: {hoge: 'hoge', fuga: 'hoge'}}
@@ -24,9 +24,11 @@ const data = fromString('{"test": {"hoge": "hoge", "fuga": "{{test.hoge}}');
 from Front Matter (wrapper of [front-matter](https://www.npmjs.com/package/front-matter)):
 
 ```js
-import {fromFrontMatter} from '@hidoo/data-from';
+import { fromFrontMatter } from '@hidoo/data-from';
 
-const data = fromFrontMatter('---\ntest:\n  hoge: hoge\n  fuga: "{{test.hoge}}"\n---\n');
+const data = fromFrontMatter(
+  '---\ntest:\n  hoge: hoge\n  fuga: "{{test.hoge}}"\n---\n'
+);
 // {body: '', attributes: {test: {hoge: 'hoge', fuga: 'hoge'}}, frontmatter: 'test:\n  hoge: hoge\n  fuga: "{{test.hoge}}"'}
 ```
 
@@ -43,7 +45,7 @@ from files (glob pattern):
 ```
 
 ```js
-import {fromFiles} from '@hidoo/data-from';
+import { fromFiles } from '@hidoo/data-from';
 
 const data = fromFiles('/path/to/*.json5');
 // {data: {hoge: 'hoge', fuga: 'hoge'}}
