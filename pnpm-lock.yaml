@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  minimist: ^1.2.5
-
 dependencies:
   front-matter:
     specifier: 4.0.2
@@ -87,7 +84,7 @@ packages:
     resolution: {integrity: sha512-/AtaeEhT6ErpDhInbXmjHcUQXH0L0TEgscfcxk1qbOvLuKCa5aZT0SOOtDKFY96/CLROwbLSKyFor6idgNaU4Q==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/code-frame': 7.14.5
+      '@babel/code-frame': 7.24.2
       '@babel/generator': 7.14.8
       '@babel/helper-compilation-targets': 7.14.5(@babel/core@7.14.8)
       '@babel/helper-module-transforms': 7.14.8
@@ -187,7 +184,7 @@ packages:
       '@babel/helper-replace-supers': 7.14.5
       '@babel/helper-simple-access': 7.14.8
       '@babel/helper-split-export-declaration': 7.14.5
-      '@babel/helper-validator-identifier': 7.14.9
+      '@babel/helper-validator-identifier': 7.22.20
       '@babel/template': 7.14.5
       '@babel/traverse': 7.14.8
       '@babel/types': 7.14.9
@@ -285,7 +282,7 @@ packages:
     resolution: {integrity: sha512-6Z3Po85sfxRGachLULUhOmvAaOo7xCvqGQtxINai2mEGPFm6pQ4z5QInFnUrRpfoSV60BnjyF5F3c+15fxFV1g==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/code-frame': 7.14.5
+      '@babel/code-frame': 7.24.2
       '@babel/parser': 7.14.8
       '@babel/types': 7.14.9
     dev: true
@@ -294,7 +291,7 @@ packages:
     resolution: {integrity: sha512-kexHhzCljJcFNn1KYAQ6A5wxMRzq9ebYpEDV4+WdNyr3i7O44tanbDOR/xjiG2F3sllan+LgwK+7OMk0EmydHg==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/code-frame': 7.14.5
+      '@babel/code-frame': 7.24.2
       '@babel/generator': 7.14.8
       '@babel/helper-function-name': 7.14.5
       '@babel/helper-hoist-variables': 7.14.5
@@ -311,7 +308,7 @@ packages:
     resolution: {integrity: sha512-u0bLTnv3DFHeaQLYzb7oRJ1JHr1sv/SYDM7JSqHFFLwXG1wTZRughxFI5NCP8qBEo1rVVsn7Yg2Lvw49nne/Ow==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/helper-validator-identifier': 7.14.9
+      '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
     dev: true
 
@@ -582,7 +579,7 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       string-width: 5.1.2
-      string-width-cjs: /string-width@4.2.0
+      string-width-cjs: /string-width@4.2.3
       strip-ansi: 7.1.0
       strip-ansi-cjs: /strip-ansi@6.0.1
       wrap-ansi: 8.1.0
@@ -3559,7 +3556,6 @@ packages:
       emoji-regex: 8.0.0
       is-fullwidth-code-point: 3.0.0
       strip-ansi: 6.0.1
-    dev: true
 
   /string-width@5.1.2:
     resolution: {integrity: sha512-HnLOCR3vjcY8beoNLtcjZ5/nxn2afmME6lhrDrebokqMap+XbeW8n9TXpPDOqdGK5qcI3oT0GKTW6wC7EMiVqA==}
