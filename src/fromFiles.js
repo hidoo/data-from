@@ -1,8 +1,8 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import glob from 'glob';
 import merge from 'lodash.merge';
-import normalize from './normalize';
-import fromString from './fromString';
+import normalize from './normalize.js';
+import fromString from './fromString.js';
 
 /**
  * default options

@@ -1,6 +1,6 @@
-import fromFiles from './fromFiles';
-import fromFrontMatter from './fromFrontMatter';
-import fromString from './fromString';
+import fromFiles from './fromFiles.js';
+import fromFrontMatter from './fromFrontMatter.js';
+import fromString from './fromString.js';
 
 export { fromFiles };
 export { fromFrontMatter };

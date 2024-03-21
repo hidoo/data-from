@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import merge from 'lodash.merge';
-import normalize from './normalize';
-import parse from './parse';
+import normalize from './normalize.js';
+import parse from './parse.js';
 
 /**
  * default options

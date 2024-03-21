@@ -1,7 +1,7 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import normalize from '../src/normalize';
+import assert from 'node:assert';
+import normalize from '../src/normalize.js';
 
 describe('normalize', () => {
   it('should return empty object if argument "value" is not set.', () => {

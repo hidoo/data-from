@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 import JSON5 from 'json5';
-import normalize from './normalize';
-import log from './log';
+import normalize from './normalize.js';
+import log from './log.js';
 
 /**
  * default options

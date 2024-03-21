@@ -1,7 +1,7 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
-import parse from '../src/parse';
+import assert from 'node:assert';
+import parse from '../src/parse.js';
 
 describe('parse', () => {
   it('should return empty object if argument "value" is not set.', () => {

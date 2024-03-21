@@ -1,8 +1,8 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
+import assert from 'node:assert';
 import Handlebars from 'handlebars';
-import fromString from '../src/fromString';
+import fromString from '../src/fromString.js';
 
 describe('fromString', () => {
   it('should return empty object if arguments is not set.', () => {

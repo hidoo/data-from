@@ -1,8 +1,8 @@
 /* eslint max-len: 0, no-magic-numbers: 0 */
 
-import assert from 'assert';
+import assert from 'node:assert';
 import Handlebars from 'handlebars';
-import fromFrontMatter from '../src/fromFrontMatter';
+import fromFrontMatter from '../src/fromFrontMatter.js';
 
 describe('fromFrontMatter', () => {
   it('should return formatted object that attributes is null if argument "value" is not set.', () => {

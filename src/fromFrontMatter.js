@@ -1,5 +1,5 @@
 import frontMatter from 'front-matter';
-import fromString from './fromString';
+import fromString from './fromString.js';
 
 /**
  * default options
