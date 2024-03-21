@@ -1,22 +1,17 @@
 module.exports = {
-  'root': true,
-  'extends': [
-    '@hidoo/eslint-config',
-    '@hidoo/eslint-config/+babel',
-    '@hidoo/eslint-config/+node'
-  ],
-  'overrides': [
-    // for Mocha
+  root: true,
+  extends: ['@hidoo/eslint-config'],
+  overrides: [
     {
-      'files': [
-        '**/*.test.js'
-      ],
-      'extends': [
-        '@hidoo/eslint-config/+mocha'
-      ],
-      'rules': {
-        'no-empty-function': 'off',
-        'mocha/no-hooks-for-single-case': 'off'
+      files: ['**/src/**/*.js'],
+      extends: ['@hidoo/eslint-config/+node'],
+      rules: {}
+    },
+    {
+      files: ['**/*.test.js'],
+      extends: ['@hidoo/eslint-config/+mocha', '@hidoo/eslint-config/+node'],
+      rules: {
+        'no-empty-function': 'off'
       }
     }
   ]
