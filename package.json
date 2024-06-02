@@ -2,10 +2,10 @@
   "name": "@hidoo/data-from",
   "version": "1.0.0",
   "description": "Utility to get data from JSON, JSON5, and YAML.",
-  "packageManager": "pnpm@9.1.2",
+  "packageManager": "pnpm@9.1.4",
   "engines": {
     "node": ">=18.0.0",
-    "pnpm": "9.1.2"
+    "pnpm": "9.1.4"
   },
   "type": "module",
   "main": "src/index.js",
