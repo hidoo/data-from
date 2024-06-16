@@ -49,7 +49,7 @@
     "eslint": "8.57.0",
     "lint-staged": "15.2.5",
     "mocha": "10.4.0",
-    "prettier": "3.3.1"
+    "prettier": "3.3.2"
   },
   "dependencies": {
     "front-matter": "4.0.2",
